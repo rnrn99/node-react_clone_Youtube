@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Dropzone from "react-dropzone";
 import { Typography, Button, Form, Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
@@ -40,6 +41,22 @@ function UploadPage() {
     setCategory(event.currentTarget.value);
   };
 
+  const onDrop = (files) => {
+    let formData = new FormData();
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    };
+    formData.append("file", files[0]);
+
+    axios.post("/api/video/uploadfile", formData, config).then((response) => {
+      if (response.data.success) {
+        console.log(response.data);
+      } else {
+        alert("Failed to upload video");
+      }
+    });
+  };
+
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
@@ -48,7 +65,7 @@ function UploadPage() {
 
       <Form onSubmit>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Dropzone onDrop multiple maxSize>
+          <Dropzone onDrop={onDrop} multiple={false} maxSize={10000000}>
             {({ getRootProps, getInputProps }) => (
               <div
                 style={{
@@ -59,7 +76,7 @@ function UploadPage() {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                {...getRootProps}
+                {...getRootProps()}
               >
                 <input {...getInputProps()} />
                 <PlusOutlined style={{ fontSize: "3rem" }} />
