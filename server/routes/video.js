@@ -34,7 +34,7 @@ router.post("/uploadfile", (req, res) => {
 });
 
 router.post("/thumbnail", (req, res) => {
-  let filePath = "";
+  let url = "";
   let fileDuration = "";
 
   ffmpeg.ffprobe(req.body.filePath, function (err, metadata) {
