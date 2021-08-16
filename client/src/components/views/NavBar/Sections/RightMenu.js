@@ -20,15 +20,19 @@ function RightMenu(props) {
   };
 
   if (user.userData && user.userData.isAuth) {
+    console.log("진입", user.userData);
     return (
-      <Menu mode={props.mode}>
-        <Menu.Item key="upload">
-          <a href="/video/upload">Video Upload</a>
-        </Menu.Item>
-        <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
-        </Menu.Item>
-      </Menu>
+      <>
+        <div></div>
+        <Menu mode={props.mode}>
+          <Menu.Item key="upload">
+            <a href="/video/upload">Video Upload</a>
+          </Menu.Item>
+          <Menu.Item key="logout">
+            <a onClick={logoutHandler}>Logout</a>
+          </Menu.Item>
+        </Menu>
+      </>
     );
   } else {
     return (
