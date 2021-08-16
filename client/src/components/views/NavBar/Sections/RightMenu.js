@@ -20,7 +20,6 @@ function RightMenu(props) {
   };
 
   if (user.userData && user.userData.isAuth) {
-    console.log("진입", user.userData);
     return (
       <>
         <div></div>
