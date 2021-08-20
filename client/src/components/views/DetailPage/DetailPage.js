@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Row, Col, List, Avatar } from "antd";
+import SideVideo from "./SideVideo";
 
 function DetailPage(props) {
   const videoId = props.match.params.videoId;
@@ -39,12 +40,23 @@ function DetailPage(props) {
           </div>
         </Col>
         <Col lg={6} xs={24}>
-          side video
+          <SideVideo />
         </Col>
       </Row>
     );
   } else {
-    return <div>Loading</div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "85vh",
+        }}
+      >
+        <h2>Loading...</h2>
+      </div>
+    );
   }
 }
 
