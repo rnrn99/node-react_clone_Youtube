@@ -25,7 +25,7 @@ function SideVideo() {
         style={{ display: "flex", marginBottomL: "1rem", padding: "0 2rem" }}
       >
         <div style={{ width: "40%", margin: "0 1rem 1rem 0" }}>
-          <a href>
+          <a href={`/video/${item._id}`}>
             <img
               style={{ width: "100%", height: "100%" }}
               src={`http://localhost:5000/${item.thumbnail}`}
@@ -35,7 +35,7 @@ function SideVideo() {
         </div>
 
         <div style={{ width: "50%" }}>
-          <a href style={{ color: "gray" }}>
+          <a href={`/video/${item._id}`} style={{ color: "gray" }}>
             <span style={{ fontSize: "1rem", color: "black" }}>
               {item.title}
             </span>
