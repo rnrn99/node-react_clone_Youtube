@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
-import { FaCode } from "react-icons/fa";
 import { Card, Avatar, Col, Typography, Row } from "antd";
 
 const { Title } = Typography;
@@ -13,7 +12,7 @@ function LandingPage() {
   useEffect(() => {
     axios.get("/api/video/getvideo").then((response) => {
       if (response.data.success) {
-        console.log(response.data);
+        // console.log(response.data);
         setVideo(response.data.video);
       } else {
         alert("Failed to get video from server");
