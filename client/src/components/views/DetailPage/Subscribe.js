@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { message } from "antd";
 
 function Subscribe(props) {
   const [SubscribeNumber, setSubscribeNumber] = useState(0);
@@ -17,7 +18,7 @@ function Subscribe(props) {
 
     let subscribeVariable = {
       userTo: props.userTo,
-      userFrom: localStorage.getItem("userId"),
+      userFrom: props.userFrom,
     };
 
     axios
@@ -31,6 +32,38 @@ function Subscribe(props) {
       });
   }, []);
 
+  const onSubscribe = () => {
+    let subscribeVariable = {
+      userTo: props.userTo,
+      userFrom: props.userFrom,
+    };
+    if (Subscribed) {
+      axios
+        .post("/api/subscribe/unSubscribe", subscribeVariable)
+        .then((response) => {
+          if (response.data.success) {
+            message.success("구독이 취소되었습니다.");
+            setSubscribeNumber(SubscribeNumber - 1);
+            setSubscribed(!Subscribed);
+          } else {
+            alert("Failed to unsubscribe");
+          }
+        });
+    } else {
+      axios
+        .post("/api/subscribe/subscribe", subscribeVariable)
+        .then((response) => {
+          if (response.data.success) {
+            message.success("구독했습니다.");
+            setSubscribeNumber(SubscribeNumber + 1);
+            setSubscribed(!Subscribed);
+          } else {
+            alert("Failed to subscribe");
+          }
+        });
+    }
+  };
+
   return (
     <div>
       <button
@@ -43,7 +76,7 @@ function Subscribe(props) {
           fontSize: "1rem",
           textTransform: "uppercase",
         }}
-        onClick
+        onClick={onSubscribe}
       >
         {SubscribeNumber} {Subscribed ? "Subscribed" : "Subscribe"}
       </button>
