@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Row, Col, List, Avatar } from "antd";
 import SideVideo from "./SideVideo";
+import Subscribe from "./Subscribe";
 
 function DetailPage(props) {
   const videoId = props.match.params.videoId;
@@ -13,7 +14,7 @@ function DetailPage(props) {
   useEffect(() => {
     axios.post("/api/video/getvideodetail", variable).then((response) => {
       if (response.data.success) {
-        console.log(response.data);
+        // console.log(response.data);
         setVideoDetail(response.data.videoDetail);
       } else {
         alert("Failed to get video detail");
@@ -30,7 +31,9 @@ function DetailPage(props) {
               src={`http://localhost:5000/${VideoDetail.filePath}`}
               controls
             />
-            <List.Item actions>
+            <List.Item
+              actions={[<Subscribe userTo={VideoDetail.writer._id} />]}
+            >
               <List.Item.Meta
                 avatar={<Avatar src={VideoDetail.writer.image} />}
                 title={VideoDetail.writer.name}
