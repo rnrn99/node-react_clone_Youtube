@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Row, Col, List, Avatar } from "antd";
-import SideVideo from "./SideVideo";
-import Subscribe from "./Subscribe";
+import SideVideo from "./Section/SideVideo";
+import Subscribe from "./Section/Subscribe";
+import Comment from "./Section/Comment";
 
 function DetailPage(props) {
   const videoId = props.match.params.videoId;
@@ -46,6 +47,8 @@ function DetailPage(props) {
                 description={VideoDetail.description}
               />
             </List.Item>
+
+            <Comment />
           </div>
         </Col>
         <Col lg={6} xs={24}>
