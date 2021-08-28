@@ -48,7 +48,7 @@ function DetailPage(props) {
               />
             </List.Item>
 
-            <Comment />
+            <Comment postId={videoId} />
           </div>
         </Col>
         <Col lg={6} xs={24}>
