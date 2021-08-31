@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import SingleComment from "./SingleComment";
 
 function Comment(props) {
   const user = useSelector((state) => state.user);
-  const videoId = props.videoId;
+  const videoId = props.postId;
   const [CommentValue, setCommentValue] = useState("");
 
   const handleClick = (event) => {
@@ -22,7 +23,8 @@ function Comment(props) {
 
     axios.post("/api/comment/saveComment", variable).then((response) => {
       if (response.data.success) {
-        console.log(response.data);
+        props.refreshComment(response.data.result);
+        setCommentValue("");
       } else {
         alert("Failed to save comment");
       }
@@ -34,8 +36,18 @@ function Comment(props) {
       <br />
       <p>Replies</p>
       <hr />
-
-      {/* Comment Lists */}
+      {props.commentList &&
+        props.commentList.map(
+          (comment, index) =>
+            !comment.replyTo && (
+              <SingleComment
+                refreshComment={props.refreshComment}
+                comment={comment}
+                postId={videoId}
+                key={index}
+              />
+            ),
+        )}
 
       <form style={{ display: "flex" }} onSubmit={onSubmit}>
         <textarea

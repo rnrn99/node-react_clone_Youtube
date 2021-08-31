@@ -11,6 +11,7 @@ function DetailPage(props) {
     videoId: videoId,
   };
   const [VideoDetail, setVideoDetail] = useState([]);
+  const [CommentList, setCommentList] = useState([]);
 
   useEffect(() => {
     axios.post("/api/video/getvideodetail", variable).then((response) => {
@@ -21,7 +22,20 @@ function DetailPage(props) {
         alert("Failed to get video detail");
       }
     });
+
+    axios.post("/api/comment/getComments", variable).then((response) => {
+      if (response.data.success) {
+        setCommentList(response.data.comments);
+      } else {
+        alert("Failed to get comments");
+      }
+    });
   }, []);
+
+  const refreshComment = (newComment) => {
+    setCommentList(CommentList.concat(newComment));
+  };
+
   if (VideoDetail.writer) {
     const subscribeButton = VideoDetail.writer._id !==
       localStorage.getItem("userId") && (
@@ -48,7 +62,11 @@ function DetailPage(props) {
               />
             </List.Item>
 
-            <Comment postId={videoId} />
+            <Comment
+              refreshComment={refreshComment}
+              commentList={CommentList}
+              postId={videoId}
+            />
           </div>
         </Col>
         <Col lg={6} xs={24}>
