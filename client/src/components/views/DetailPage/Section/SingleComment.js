@@ -33,6 +33,7 @@ function SingleComment(props) {
       if (response.data.success) {
         props.refreshComment(response.data.result);
         setCommentValue("");
+        setOpenReply(false);
       } else {
         alert("Failed to save comment");
       }
@@ -56,16 +57,16 @@ function SingleComment(props) {
 
       {OpenReply && (
         <form style={{ display: "flex" }} onSubmit={onSubmit}>
-          <textarea
+          <TextArea
             style={{ width: "100%", borderRadius: "5px" }}
             onChange={handleChange}
             value={CommentValue}
             placeholder="댓글 달기"
           />
           <br />
-          <button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+          <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
             Submit
-          </button>
+          </Button>
         </form>
       )}
     </div>
