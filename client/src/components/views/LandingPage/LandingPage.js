@@ -7,6 +7,7 @@ const { Title } = Typography;
 const { Meta } = Card;
 
 function LandingPage() {
+  console.log(process.env.REACT_APP_IMAGE_URI);
   const [Video, setVideo] = useState([]);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function LandingPage() {
           <a href={`/video/${item._id}`}>
             <img
               style={{ width: "100%" }}
-              src={`http://localhost:5000/${item.thumbnail}`}
+              src={`${process.env.REACT_APP_IMAGE_URI}${item.thumbnail}`}
               alt={item.title}
             />
             <div

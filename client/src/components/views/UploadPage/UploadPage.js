@@ -134,7 +134,7 @@ function UploadPage(props) {
           {ThumbnailPath && (
             <div>
               <img
-                src={`http://localhost:5000/${ThumbnailPath}`}
+                src={`${process.env.REACT_APP_IMAGE_URI}${ThumbnailPath}`}
                 alt="thumbnail"
               />
             </div>

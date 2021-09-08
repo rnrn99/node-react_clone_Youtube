@@ -52,7 +52,7 @@ function DetailPage(props) {
           <div style={{ width: "100%", padding: "3rem 4rem" }}>
             <video
               style={{ width: "100%" }}
-              src={`http://localhost:5000/${VideoDetail.filePath}`}
+              src={`${process.env.REACT_APP_IMAGE_URI}${VideoDetail.filePath}`}
               controls
             />
             <List.Item

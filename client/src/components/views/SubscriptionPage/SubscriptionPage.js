@@ -34,7 +34,7 @@ function SubscriptionPage() {
           <a href={`/video/${item._id}`}>
             <img
               style={{ width: "100%" }}
-              src={`http://localhost:5000/${item.thumbnail}`}
+              src={`${process.env.REACT_APP_IMAGE_URI}${item.thumbnail}`}
               alt={item.title}
             />
             <div

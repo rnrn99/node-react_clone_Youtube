@@ -28,7 +28,7 @@ function SideVideo() {
           <a href={`/video/${item._id}`}>
             <img
               style={{ width: "100%", height: "100%" }}
-              src={`http://localhost:5000/${item.thumbnail}`}
+              src={`${process.env.REACT_APP_IMAGE_URI}${item.thumbnail}`}
               alt="thumbnail"
             />
           </a>
